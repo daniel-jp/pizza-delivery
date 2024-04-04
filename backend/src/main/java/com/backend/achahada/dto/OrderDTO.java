@@ -1,21 +1,18 @@
-package com.backend.achahada.entities;
+package com.backend.achahada.dto;
 
+import com.backend.achahada.entities.Order;
 import com.backend.achahada.enums.OrderStatus;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "tb_order")
-public class Order implements Serializable {
-    private static final  long serialVersionUID=1L;
+public class OrderDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  static final long serialVersionUID = 1L;
+
     private Long id;
     private String address;
     private Double latitude;
@@ -23,15 +20,13 @@ public class Order implements Serializable {
     private Instant moment;
     private OrderStatus status;
 
-    @ManyToMany
-    @JoinTable(name="tb_order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Product> products = new HashSet<>();
+    private List<ProductDTO> products = new ArrayList<>();
 
-    public Order() {}
+    public  OrderDTO(){}
 
-    public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
+
+
+    public OrderDTO(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
         this.id = id;
         this.address = address;
         this.latitude = latitude;
@@ -40,11 +35,21 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Long getId() {
-        return id;
+    public OrderDTO(Order entity) {
+        id = entity.getId();
+        address = entity.getAddress();
+        latitude = entity.getLatitude();
+        longitude = entity.getLongitude();
+        moment = entity.getMoment();
+        status = entity.getStatus();
+       // products = entity.getProducts().stream()
+         //       .map(x-> new ProductDTO(x)).collect(Collectors.toList());
+        products = entity.getProducts().stream().map(ProductDTO::new).collect(Collectors.toList());
     }
 
-    public void setIs(Long id) {
+    public Long getId() { return id;}
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,20 +93,11 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Set<Product> getProducts() {
+    public List<ProductDTO> getProducts() {
         return products;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setProducts(List<ProductDTO> products) {
+        this.products = products;
     }
 }
