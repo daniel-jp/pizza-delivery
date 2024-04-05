@@ -27,4 +27,20 @@ public class ProductService {
         return list.stream().map(ProductDTO::new).collect(Collectors.toList());
         //return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
     }
+
+    private String name;
+    private Double price;
+    private String description;
+    private String imageUri;
+
+    /*
+    @Transactional
+    public ProductDTO insert(Product dto){
+
+        Product product = new Product(null, dto.getName(),dto.getPrice(), dto.getDescription(),
+                dto.getImageURL());
+
+        return product;
+    }*/
+
 }
