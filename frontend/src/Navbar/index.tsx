@@ -7,10 +7,10 @@ function Navbar() {
         <Logo/>
         <img src="/src/Home/img/deliv3.png" alt="" />
 
-        <a className='logo-text' href="home">ACHA Delivery</a>
-      
+        <a href="/" className='logo-text'>BUTCHER Delivery</a>
     </nav>
   )
 }
 
 export default Navbar
+ 
