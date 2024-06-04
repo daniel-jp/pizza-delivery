@@ -1,12 +1,16 @@
 import React from 'react'
 import ProductCard from './ProductCard'
 import { Product } from './types'
+import { checkIsSelected } from './helpers'
 
 
 type Props ={
-    products:Product[]
+    products:Product[];
+    selectedProducts:Product[] ;
+    onSelectProduct:(product:Product) => void;
+
 }
-function ProductList({products}:Props) {
+function ProductList({products,selectedProducts, onSelectProduct}:Props) {
 
 
   return (
@@ -15,7 +19,10 @@ function ProductList({products}:Props) {
         {
             products.map(product =>(
                 <ProductCard 
-                key={product.id} product={product}
+                key={product.id}  
+                product={product}
+                onSelectProduct={onSelectProduct}
+                isSeleted={checkIsSelected(selectedProducts, product)}
                 
                 />
             ))
