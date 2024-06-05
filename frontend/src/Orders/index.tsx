@@ -7,7 +7,6 @@ import {OrderLocationData, Product} from"./types";
 import { fetchProduct, saveOrder } from '../api';
 import { OrderLocation } from './OrderLocation';
 import OrderSummary from './OrderSummary';
-import Footer from '../Footer';
 import { checkIsSelected } from './helpers';
 import { toast } from 'react-toastify';
  
@@ -75,9 +74,8 @@ const totalPrice = selectedProducts.reduce((sum, item) =>{
       amount={selectedProducts.length}
       totalPrice={ totalPrice} onSubmit={handleSubmit}/>
      
-
    </div>   
-   <Footer/></>
+   </>
   ) 
 }
 
