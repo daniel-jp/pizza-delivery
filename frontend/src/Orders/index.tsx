@@ -9,6 +9,7 @@ import { OrderLocation } from './OrderLocation';
 import OrderSummary from './OrderSummary';
 import { checkIsSelected } from './helpers';
 import { toast } from 'react-toastify';
+import Footer from '../Footer/Footer';
  
 function Orders() {
 const [products, setProducts ]= useState<Product[]>([]);
@@ -74,7 +75,10 @@ const totalPrice = selectedProducts.reduce((sum, item) =>{
       amount={selectedProducts.length}
       totalPrice={ totalPrice} onSubmit={handleSubmit}/>
      
-   </div>   
+   </div> 
+
+   
+   <Footer/>
    </>
   ) 
 }

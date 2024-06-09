@@ -7,7 +7,7 @@ function Navbar() {
         <Logo/>
         <img src="/src/Home/img/deliv3.png" alt="" />
 
-        <a href="/" className='logo-text'>BUTCHER Delivery</a>
+        <a href="/" className='logo-text'>PIZZA Delivery</a>
     </nav>
   )
 }
