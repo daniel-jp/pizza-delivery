@@ -9,8 +9,7 @@ import { OrderLocation } from './OrderLocation';
 import OrderSummary from './OrderSummary';
 import { checkIsSelected } from './helpers';
 import { toast } from 'react-toastify';
-import Footer from '../../../frontend/src/Footer/Footer'
- 
+import FootComponent from"../Footer/Footer" 
 function Orders() {
 const [products, setProducts ]= useState<Product[]>([]);
 const [selectedProducts, setSelectedProducts ]= useState<Product[]>([]);
@@ -77,9 +76,10 @@ const totalPrice = selectedProducts.reduce((sum, item) =>{
      
    </div> 
 
-   
-   <Footer/>
-   </>
+    <div>
+      <FootComponent/>
+    </div>
+      </>
   ) 
 }
 
