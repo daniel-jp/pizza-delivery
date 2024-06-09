@@ -9,7 +9,7 @@ import { OrderLocation } from './OrderLocation';
 import OrderSummary from './OrderSummary';
 import { checkIsSelected } from './helpers';
 import { toast } from 'react-toastify';
-import Footer from '../Footer/Footer';
+import Footer from '../../../frontend/src/Footer/Footer'
  
 function Orders() {
 const [products, setProducts ]= useState<Product[]>([]);

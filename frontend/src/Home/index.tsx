@@ -1,7 +1,7 @@
 import './styles.css'
 
 import {ReactComponent as MainImg } from'./img/deliver1.svg'
-import Footer from '../Footer/Footer'
+import Footer from '../../../frontend/src/Footer/Footer'
 
 function Home() {
   return (
