@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: backend-service
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    rootDir: backend

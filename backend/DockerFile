@@ -1,43 +1,15 @@
+FROM ubuntu:latest AS build
 
-# Etapa de construção
-FROM maven:3.9.4-openjdk-11 AS build
-
-# Copiar todos os arquivos do projeto para o contêiner
+RUN apt-get update
+RUN apt-get install openjdk-11-jdk -y
 COPY . .
 
-# Executar o build do Maven, pulando os testes
-RUN mvn clean package -DskipTests
+RUN apt-get install maven -y
+RUN mvn clean install 
 
-# Etapa de runtime
 FROM openjdk:11-jdk-slim
-
-# Copiar o JAR construído da etapa de build
-COPY --from=build /target/backend-0.0.1.jar backend-0.0.1.jar
-
-# Expor a porta da aplicação
 EXPOSE 8080
 
-# Definir o ponto de entrada do contêiner
+COPY --from=build /target/backend-0.0.1.jar backend-0.0.1.jar
+
 ENTRYPOINT ["java", "-jar", "backend-0.0.1.jar"]
-
-
-
-
-
-
-#FROM ubuntu:latest AS build
-
-#RUN apt-get update
-#RUN apt-get install openjdk-11-jdk -y
-#COPY . .
-
-#RUN apt-get install maven -y
-#RUN mvn clean install 
-
-#FROM openjdk:11-jdk-slim
-#EXPOSE 8080
-
-#COPY --from=build /target/backend-0.0.1.jar app.jar
-
-#ENTRYPOINT ["java", "-jar", "app.jar"]
-
