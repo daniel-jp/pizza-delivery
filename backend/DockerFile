@@ -1,8 +1,17 @@
 # Etapa de construção
+# Etapa de build
 FROM maven:3.8.5-openjdk-17 AS build
 
-# Copiar todos os arquivos do projeto para o contêiner
-COPY . .
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar arquivo de configuração do Maven
+COPY pom.xml .
+
+# Baixar dependências do Maven
+RUN mvn dependency:go-offline -B
+
+COPY src ./src
 
 # Executar o build do Maven, pulando os testes
 RUN mvn clean package -DskipTests
@@ -10,8 +19,11 @@ RUN mvn clean package -DskipTests
 # Etapa de runtime
 FROM openjdk:17.0.1-jdk-slim
 
+# Definir diretório de trabalho
+WORKDIR /app
+
 # Copiar o JAR construído da etapa de build
-COPY --from=build /target/backend-0.0.1-SNAPSHOT.jar backend.jar
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar backend.jar
 
 # Expor a porta da aplicação
 EXPOSE 8080
